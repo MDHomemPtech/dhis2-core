@@ -190,6 +190,7 @@ public abstract class AbstractTrackedEntityInstanceService
         trackedEntityInstance.setLastUpdated( DateUtils.getIso8601NoTz( entityInstance.getLastUpdated() ) );
         trackedEntityInstance.setLastUpdatedAtClient( DateUtils.getIso8601NoTz( entityInstance.getLastUpdatedAtClient() ) );
         trackedEntityInstance.setInactive( entityInstance.isInactive() );
+        trackedEntityInstance.setGeometry( entityInstance.getGeometry() );
 
         if ( params.isIncludeRelationships() )
         {
@@ -278,6 +279,7 @@ public abstract class AbstractTrackedEntityInstanceService
         entityInstance.setTrackedEntityType( trackedEntityType );
         entityInstance.setUid( CodeGenerator.isValidUid( trackedEntityInstance.getTrackedEntityInstance() ) ?
             trackedEntityInstance.getTrackedEntityInstance() : CodeGenerator.generateUid() );
+        entityInstance.setGeometry( trackedEntityInstance.getGeometry() );
 
         return entityInstance;
     }

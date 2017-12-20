@@ -34,7 +34,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import org.apache.commons.lang3.StringUtils;
 import org.hisp.dhis.common.DxfNamespaces;
+import org.hisp.dhis.common.GeometryFeature;
 import org.hisp.dhis.dxf2.events.enrollment.Enrollment;
+import org.hisp.dhis.organisationunit.FeatureType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +71,8 @@ public class TrackedEntityInstance
     private Boolean inactive;
 
     private Boolean deleted = false;
+
+    private GeometryFeature geometry;
 
     public TrackedEntityInstance()
     {
@@ -273,5 +277,53 @@ public class TrackedEntityInstance
             ", attributes=" + attributes +
             ", inactive=" + inactive +
             '}';
+    }
+
+    public GeometryFeature getGeometry()
+    {
+        return geometry;
+    }
+
+    public void setGeometry( GeometryFeature geometry )
+    {
+        this.geometry = geometry;
+    }
+
+    @JsonProperty( value = "featureType" )
+    @JacksonXmlProperty( localName = "featureType", namespace = DxfNamespaces.DXF_2_0 )
+    public FeatureType getFeatureType()
+    {
+        return geometry != null ? geometry.getFeatureType() : null;
+    }
+
+    @JsonProperty( value = "featureType" )
+    @JacksonXmlProperty( localName = "featureType", namespace = DxfNamespaces.DXF_2_0 )
+    public void setFeatureType( FeatureType featureType )
+    {
+        if ( geometry == null )
+        {
+            geometry = new GeometryFeature();
+        }
+
+        geometry.setFeatureType( featureType );
+    }
+
+    @JsonProperty( value = "coordinates" )
+    @JacksonXmlProperty( localName = "coordinates", namespace = DxfNamespaces.DXF_2_0 )
+    public String getCoordinates()
+    {
+        return geometry != null ? geometry.getCoordinates() : null;
+    }
+
+    @JsonProperty( value = "coordinates" )
+    @JacksonXmlProperty( localName = "coordinates", namespace = DxfNamespaces.DXF_2_0 )
+    public void setCoordinates( String coordinates )
+    {
+        if ( geometry == null )
+        {
+            geometry = new GeometryFeature();
+        }
+
+        geometry.setCoordinates( coordinates );
     }
 }

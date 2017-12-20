@@ -20,6 +20,11 @@
 
     <property name="deleted" column="deleted" />
 
+    <component name="geometry">
+      <property name="coordinates" column="coordinates" />
+      <property name="featureType" column="featuretype" />
+    </component>
+
     <set name="trackedEntityAttributeValues" inverse="true">
       <key column="trackedentityinstanceid" />
       <one-to-many class="org.hisp.dhis.trackedentityattributevalue.TrackedEntityAttributeValue" />
